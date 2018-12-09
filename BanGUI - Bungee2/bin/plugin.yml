@@ -1,0 +1,13 @@
+name: Banns
+version: b21.3WEB6
+main: de.luuuuuis.Banns
+author: Luuuuuis
+authors: [Luuuuuis, yanjulang]
+website: https://www.spigotmc.org/resources/bangui-bungeecord-bangui-inc-webinterface-and-discord-bot.57031/
+prefix: Banns
+
+commands:
+  check:
+  unban:
+  unmute:
+  webinterface:
