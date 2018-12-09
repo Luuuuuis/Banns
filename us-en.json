@@ -1,0 +1,11 @@
+{
+	"Messages": {
+		"BanReason": "%servername%\n\n&7You got %timeperm% banned!\nReason: &e%reason%\nYou can apply for an unban in our TeamSpeak.",
+		"MuteReason": "%prefix%&7You got muted for &c%reason%\n%prefix%You can apply for an unban in our TeamSpeak",
+		"PermaBan": "%servername%\n\n&7You got %timeperm% banned!\nReason: &e%reason%\n\n&7You can apply for an unban in our TeamSpeak",
+		"BannedJoin": "%servername%\n\n&7You got %timeperm% banned.\n&7Reason: &e%reason%\n&7Remaining time: &e%remtime%\n\n&7You can apply for an unban in our TeamSpeak.",
+		"MutedChat": "%prefix%Your are muted!\n%prefix%Reason: &e%reason%\n%prefix%You can apply for an unban in our TeamSpeak.",
+		"MutedJoin": "%prefix%Your are muted!\n%prefix%Reason: &e%reason%\n%prefix%Remaining Time: &e%remTime%\n%prefix%You can apply for an unban in our TeamSpeak.",
+		"NoPermissions": "%prefix%&cYou have no authorization for this"
+	}
+}
