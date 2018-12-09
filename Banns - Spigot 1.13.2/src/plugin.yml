@@ -1,0 +1,10 @@
+name: Banns
+version: b21.3WEB6
+main: de.luuuuuis.Banns
+author: Luuuuuis
+api-version: 1.13
+
+commands:
+  ban:
+    description: Ban a Player in GUI
+    aliases: mute
