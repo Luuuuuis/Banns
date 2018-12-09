@@ -65,7 +65,7 @@ public class Banns extends Plugin {
 		System.out.println("");
 		
 		/**
-		 * 
+		 * test
 		 * 
 		 * Auto-Updater
 		 * 
