@@ -8,16 +8,16 @@ which every server should use.
 You can ban player easily with a GUI or via Discord.
 
 Permissions:
-Banns.Ban
-Banns.Unban
-Banns.administrate
+Banns.Ban;
+Banns.Unban;
+Banns.administrate;
 
 Commands:
-/ban [/mute]
-/unban
-/unmute
-/check
-/webinterface
+/ban [/mute];
+/unban;
+/unmute;
+/check;
+/webinterface;
 
 Install:
 Move "Banns - Bungee.jar" into your BungeeCode plugins folder.
