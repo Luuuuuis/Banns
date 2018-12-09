@@ -1,0 +1,23 @@
+{
+	"Prefix": "&cBanns &8>> &7",
+	"Serverinfo": {
+		"Servername": "&aYourServerName",
+		"domainname": "YourServer.com",
+		"Language-File": "us-en"
+		},
+	"MySQL": {
+		"Host": "localhost",
+		"Port": 3306,
+		"Database": "DB",
+		"User": "root",
+		"Password": "sweetPassword"
+		},
+	"Discord": {
+		"State": false,
+		"Token": "YourDiscordToken",
+		"Channel-ID": "YourChannelToken"
+		},
+	"Webinterface": {
+		"State": true
+	}
+}
