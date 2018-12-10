@@ -9,6 +9,8 @@ public class MuteInfo {
 	  public long timeBanned, timeNext;
 	  public boolean perm;
 	  
+	  static MySQL MySQL = new MySQL();
+	  
 	  public MuteInfo(ResultSet rs) throws SQLException {
 		  uuid = rs.getString("UUID");
 		  banner = rs.getString("BANNER");

@@ -10,7 +10,7 @@ import de.luuuuuis.Info;
 import de.luuuuuis.MojangUUIDResolve;
 import de.luuuuuis.TimeManager;
 import de.luuuuuis.SQL.BanInfo;
-import de.luuuuuis.SQL.BanSQLHandler;
+import de.luuuuuis.SQL.Ban;
 import de.luuuuuis.SQL.MuteInfo;
 import de.luuuuuis.SQL.MuteSQLHandler;
 
@@ -70,7 +70,7 @@ public class BanContextHandler extends LuisHandler {
 		String Time;
 		try {
 			
-			for(BanInfo banInfo : BanSQLHandler.getInfos()) {
+			for(BanInfo banInfo : BanInfo.getInfos()) {
 				
 				if(banInfo.uuid == null || banInfo.uuid == "null")
 					continue;
@@ -81,7 +81,7 @@ public class BanContextHandler extends LuisHandler {
 					Time = TimeManager.calc(((long) banInfo.timeNext - (long)System.currentTimeMillis())/1000L);
 				
 				if(Time.equalsIgnoreCase("0 seconds")) {
-					BanSQLHandler.unban(banInfo.uuid);
+					new Ban(banInfo.uuid).unban();
 					continue;
 				}
 				

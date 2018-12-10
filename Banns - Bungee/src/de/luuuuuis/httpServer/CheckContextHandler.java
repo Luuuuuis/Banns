@@ -14,7 +14,7 @@ import de.luuuuuis.Info;
 import de.luuuuuis.MojangUUIDResolve;
 import de.luuuuuis.TimeManager;
 import de.luuuuuis.SQL.BanInfo;
-import de.luuuuuis.SQL.BanSQLHandler;
+import de.luuuuuis.SQL.Ban;
 import de.luuuuuis.SQL.MuteInfo;
 import de.luuuuuis.SQL.MuteSQLHandler;
 
@@ -44,8 +44,8 @@ public class CheckContextHandler extends LuisHandler {
 				String uuid = MojangUUIDResolve.getUUIDResult(name).getValue();
 				
 				if(type.equals("BAN")) {
-					if(BanSQLHandler.playerExists(uuid)) {
-						BanSQLHandler.unban(uuid);
+					if(BanInfo.getBanInfo(uuid) != null) {
+						new Ban(uuid).unban();
 						script =
 								"		swal({\r\n" + 
 								"			  title: \"Successfully unbanned\",\r\n" + 

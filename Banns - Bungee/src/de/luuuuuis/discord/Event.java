@@ -13,7 +13,7 @@ import de.luuuuuis.Info;
 import de.luuuuuis.MojangUUIDResolve;
 import de.luuuuuis.TimeManager;
 import de.luuuuuis.SQL.BanInfo;
-import de.luuuuuis.SQL.BanSQLHandler;
+import de.luuuuuis.SQL.Ban;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.Permission;
@@ -168,9 +168,9 @@ public class Event extends ListenerAdapter {
             			
             			String uuid = MojangUUIDResolve.getUUIDResult(toUnban).getValue();
             			
-            			if(BanSQLHandler.playerExists(uuid)) {
+            			if(BanInfo.getBanInfo(uuid) != null) {
             			
-            				BanSQLHandler.unban(uuid);
+            				new Ban(uuid).unban();
             			
             				
                 			EmbedBuilder embed = new EmbedBuilder();
@@ -292,12 +292,8 @@ static class MessageRunnable implements Runnable {
 	    		  }
 			  }
 			  
-			  if(BanSQLHandler.playerExists(uuid)) {
-				  BanSQLHandler.unban(uuid);
-			  }
-			  
 			  //send ban to SQL (async for server not for sql)
-			  BanSQLHandler.createBan(uuid, reason, ip, banner, time, perma);
+			  new Ban(uuid).ban(reason, ip, banner, time, perma);
 			  
 			  Info.LastBanName = toBan;
 			  Info.LastBanReason = reason;
