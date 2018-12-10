@@ -47,7 +47,7 @@ public class Banns extends Plugin {
 
 	public static DiscordBot dcbot;
 	public BanHttpServer banserver;
-	
+
 	MySQL MySQL;
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -110,10 +110,10 @@ public class Banns extends Plugin {
 		}
 
 		FilePath = getDataFolder().getPath();
-		
+
 		URL dowURL = null;
 		File file;
-		
+
 		file = new File(getDataFolder().getPath(), "config.json");
 		try {
 			dowURL = new URL("http://luis.bplaced.net/Banns/Auto-Updater/config.json");
@@ -121,16 +121,12 @@ public class Banns extends Plugin {
 			ex.printStackTrace();
 		}
 
-		try ( 	InputStream input = dowURL.openStream(); 
-				FileOutputStream output = new FileOutputStream(file);
-		) {
+		if (!file.exists()) {
+			try (InputStream input = dowURL.openStream(); FileOutputStream output = new FileOutputStream(file);) {
 
-			if (!getDataFolder().exists()) {
-				getDataFolder().mkdir();
-			}
-
-			
-			if (!file.exists()) {
+				if (!getDataFolder().exists()) {
+					getDataFolder().mkdir();
+				}
 
 				byte[] buffer = new byte[4096];
 				int n = 0;
@@ -143,29 +139,21 @@ public class Banns extends Plugin {
 
 				System.out.println("Banns >> config downloaded");
 
+			} catch (Exception ex) {
+				ex.printStackTrace();
 			}
-			
-		} catch (Exception ex) {
-			ex.printStackTrace();
 		}
-		
-		
+
 		try {
 			dowURL = new URL("http://luis.bplaced.net/Banns/Auto-Updater/us-en.json");
 		} catch (MalformedURLException ex) {
 			ex.printStackTrace();
 		}
-		
-		try ( 	InputStream input = dowURL.openStream();
-				FileOutputStream output = new FileOutputStream(file);
-		) {
 
-			File languagefile = new File(getDataFolder().getPath(), "us-en.json");
-			if (!languagefile.exists()) {
+		file = new File(getDataFolder().getPath(), "us-en.json");
 
-
-
-
+		if (!file.exists()) {
+			try (InputStream input = dowURL.openStream(); FileOutputStream output = new FileOutputStream(file);) {
 
 				byte[] buffer = new byte[4096];
 				int n = 0;
@@ -177,11 +165,9 @@ public class Banns extends Plugin {
 				output.close();
 
 				System.out.println("Banns >> language file downloaded");
-
+			} catch (IOException ex) {
+				ex.printStackTrace();
 			}
-
-		} catch (IOException ex) {
-			ex.printStackTrace();
 		}
 
 		Thread th = new Thread(new Runnable() {
