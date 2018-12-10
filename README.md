@@ -31,7 +31,7 @@ You can access your webinterface with the port "1337". Example: "http://yourDoma
 Create an account with /webinterface
 
 For the Discord Bot:
-watch this video until 2:30 and follow the steps
+watch this video (https://www.youtube.com/watch?v=oE6alzUzcw4) until 2:30 and follow the steps
 Now enter your Bot ID in the config.json
 Right click on a channel and click copy ID and paste it in your config.
 Then restart.
@@ -40,7 +40,7 @@ And there you are ;)
 Need help? Join my Discord!
 
 
-Discord for Support: https://discord.gg/wKuHFWa
+Discord for Support: https://discord.gg/2aSSGcz
 
 Have Fun!
 
