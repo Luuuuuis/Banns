@@ -65,7 +65,7 @@ public class Banns extends Plugin {
 
 		/**
 		 *
-		 * a
+		 *
 		 * Auto-Updater
 		 * 
 		 * 
