@@ -16,7 +16,7 @@ import de.luuuuuis.TimeManager;
 import de.luuuuuis.SQL.BanInfo;
 import de.luuuuuis.SQL.Ban;
 import de.luuuuuis.SQL.MuteInfo;
-import de.luuuuuis.SQL.MuteSQLHandler;
+import de.luuuuuis.SQL.Mute;
 
 public class CheckContextHandler extends LuisHandler {
 
@@ -61,8 +61,8 @@ public class CheckContextHandler extends LuisHandler {
 								"			});\r\n";
 					}
 				} else if(type.equals("MUTE")) {
-					if(MuteSQLHandler.playerExists(uuid)) {
-						MuteSQLHandler.unban(uuid);
+					if(MuteInfo.getMuteInfo(uuid) != null) {
+						new Mute(uuid).unban();
 						script =
 								"		swal({\r\n" + 
 								"			  title: \"Successfully unmuted\",\r\n" + 
@@ -93,7 +93,7 @@ public class CheckContextHandler extends LuisHandler {
 					String ban = "no info found";
 				
 					BanInfo banInfo = BanInfo.getBanInfo(uuid);
-					MuteInfo muteInfo = MuteInfo.getBanInfo(uuid);
+					MuteInfo muteInfo = MuteInfo.getMuteInfo(uuid);
 				
 					if(muteInfo != null) {
 						

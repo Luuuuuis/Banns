@@ -32,7 +32,6 @@ public class BanInfo {
 			if (rs.next()) {
 				return new BanInfo(rs);
 			}
-			return null;
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		}

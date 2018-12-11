@@ -14,7 +14,7 @@ import com.sun.net.httpserver.HttpExchange;
 
 import de.luuuuuis.Banns;
 import de.luuuuuis.Info;
-import de.luuuuuis.SQL.HttpSQLHandler;
+import de.luuuuuis.SQL.HttpSQL;
 
 public class AccountsContextHandler extends LuisHandler {
 	
@@ -40,9 +40,9 @@ public class AccountsContextHandler extends LuisHandler {
 				if(request.containsKey("del") && !request.containsKey("q")) {
 					String user = request.get("del");
 					
-					if(HttpSQLHandler.UserExists(user)) {
+					if(HttpSQL.UserExists(user)) {
 						
-						HttpSQLHandler.deletePlayer(user);
+						HttpSQL.deletePlayer(user);
 
 					}
 
@@ -63,8 +63,8 @@ public class AccountsContextHandler extends LuisHandler {
 					// .../accounts?user=user&password=password
 					String user = request.get("user"), password = request.get("password");
 					
-					if(!HttpSQLHandler.UserExists(user)) {
-						HttpSQLHandler.createPlayer(user, password);
+					if(!HttpSQL.UserExists(user)) {
+						HttpSQL.createPlayer(user, password);
 						script ="<script type=\"text/javascript\">\r\n" + 
 								"\r\n" + 
 								"	$(window).ready(function () {\r\n" + 
@@ -95,7 +95,7 @@ public class AccountsContextHandler extends LuisHandler {
 				
 				String back = "";
 				
-				for(String users : HttpSQLHandler.getInfos()) {
+				for(String users : HttpSQL.getInfos()) {
 					
 					back += "<tr><td>" + users + "</td><td><a href=\"/accounts?del=" + users + "\"><i class=\"fa fa-trash\"></i></a></td></tr>";
 					

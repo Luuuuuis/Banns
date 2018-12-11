@@ -9,9 +9,7 @@ import de.luuuuuis.Info;
 import de.luuuuuis.MojangUUIDResolve;
 import de.luuuuuis.TimeManager;
 import de.luuuuuis.SQL.BanInfo;
-import de.luuuuuis.SQL.Ban;
 import de.luuuuuis.SQL.MuteInfo;
-import de.luuuuuis.SQL.MuteSQLHandler;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
@@ -49,7 +47,7 @@ public class CheckCmd extends Command {
 		uuid = MojangUUIDResolve.getUUIDResult(gecheckter).getValue();
 
 		BanInfo banInfo = BanInfo.getBanInfo(uuid);
-		MuteInfo muteInfo = MuteInfo.getBanInfo(uuid);
+		MuteInfo muteInfo = MuteInfo.getMuteInfo(uuid);
 
 		p.sendMessage("");
 		p.sendMessage(Banns.getPrefix() + "§7Check §a" + plyr);
@@ -73,10 +71,6 @@ public class CheckCmd extends Command {
 				long zi = crt / 1000L;
 				long hz = uz - zi;
 				String lastSecs = TimeManager.calc(hz);
-
-				if (lastSecs.equalsIgnoreCase("null") && unbannedtime != 0L) {
-					new Ban(uuid).unban();
-				}
 
 				Date date = new Date(banInfo.timeBanned);
 				DateFormat formatter = new SimpleDateFormat("dd.MM.yyyy 'at' HH:mm");
@@ -102,10 +96,6 @@ public class CheckCmd extends Command {
 			long zi = crt / 1000L;
 			long hz = uz - zi;
 			String lastSecs = TimeManager.calc(hz);
-
-			if (lastSecs.startsWith("-")) {
-				MuteSQLHandler.unban(uuid);
-			}
 
 			Date date = new Date(muteInfo.timeBanned);
 			DateFormat formatter = new SimpleDateFormat("dd.MM.yyyy 'at' HH:mm");

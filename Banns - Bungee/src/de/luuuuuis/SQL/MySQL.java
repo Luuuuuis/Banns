@@ -11,19 +11,18 @@ import de.luuuuuis.Info;
 public class MySQL {
 
 	public MySQL() {
-		//idk
+		// idk
 	}
-	
-	public Connection con;
-	
+
+	public static Connection con;
+
 	public void connect() {
 		if (!isConnected()) {
-			try (Connection conn = DriverManager.getConnection(
-					"jdbc:mysql://" + Info.MySQL.get("Host").toString() + ":" + Info.MySQL.get("Port").toString() + "/"
-							+ Info.MySQL.get("Database").toString()
-							+ "?autoReconnect=true&useUnicode=yes",
-					Info.MySQL.get("User").toString(), Info.MySQL.get("Password").toString());) {
-				con = conn;
+			try {
+				con = DriverManager.getConnection(
+						"jdbc:mysql://" + Info.MySQL.get("Host").toString() + ":" + Info.MySQL.get("Port").toString()
+								+ "/" + Info.MySQL.get("Database").toString() + "?autoReconnect=true&useUnicode=yes",
+						Info.MySQL.get("User").toString(), Info.MySQL.get("Password").toString());
 				System.out.println("Banns >> MySQL Connected");
 				createTable();
 			} catch (SQLException e) {
@@ -41,7 +40,6 @@ public class MySQL {
 						"CREATE TABLE IF NOT EXISTS MutedPlayers(UUID VARCHAR(36), BANNER VARCHAR(16), BANNED_TIME BIGINT(100), BANNED_NEXT BIGINT(100), REASON VARCHAR(100), PERM int(2))");
 				con.createStatement().executeUpdate(
 						"CREATE TABLE IF NOT EXISTS WebInterface(USERNAME VARCHAR(16), PASSWORD VARCHAR(128))");
-				System.out.println("Banns >> Tabels created!");
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -78,13 +76,13 @@ public class MySQL {
 	public ResultSet getResult(String qry) {
 		if (isConnected()) {
 			ResultSet rs = null;
-			try (Statement st = con.createStatement();) {
+			try {
+				Statement st = con.createStatement();
 				rs = st.executeQuery(qry);
-
+				return rs;
 			} catch (SQLException ex) {
 				ex.printStackTrace();
 			}
-
 			return rs;
 		} else {
 			connect();

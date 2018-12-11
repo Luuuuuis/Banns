@@ -14,7 +14,7 @@ import de.luuuuuis.MojangUUIDResolve;
 import de.luuuuuis.TimeManager;
 import de.luuuuuis.SQL.Ban;
 import de.luuuuuis.SQL.BanInfo;
-import de.luuuuuis.SQL.MuteSQLHandler;
+import de.luuuuuis.SQL.Mute;
 import de.luuuuuis.commands.CheckCmd;
 import de.luuuuuis.listener.ChatEvent;
 import net.md_5.bungee.BungeeCord;
@@ -97,7 +97,7 @@ public class PluginMessageListener implements Listener {
 		} else {
 			uuid = MojangUUIDResolve.getUUIDResult(nameName).getValue();
 		}
-		
+
 		Ban ban = new Ban(uuid);
 
 		if (time == -1) {
@@ -140,14 +140,15 @@ public class PluginMessageListener implements Listener {
 				Info.LastBanReason = reason;
 				Info.LastBanTime = TimeManager.calc(time / 1000L);
 
-				Banns.dcbot.onBann(nameName, reason, TimeManager.calc(time / 1000L));
-
 				ProxyServer.getInstance().getPlayers().forEach(all -> {
 					if (all.hasPermission(Banns.getBanperm())) {
 						all.sendMessage(Banns.getPrefix() + "§e" + banner.getDisplayName() + " §7banned §c" + nameName
 								+ "§7 for §c§l" + reason + "§7.");
 					}
 				});
+
+				if (Banns.dcbot != null)
+					Banns.dcbot.onBann(nameName, reason, TimeManager.calc(time / 1000L));
 
 			} else {
 				banner.sendMessage(Banns.getPrefix()
@@ -160,22 +161,18 @@ public class PluginMessageListener implements Listener {
 				if (name != null) {
 					if (!name.hasPermission(Banns.getBanperm())) {
 						try {
-							name.sendMessage(new TextComponent(Info.getMuteReason()));
+							name.sendMessage(Info.getMuteReason());
 							ChatEvent.mutedList.put(name.getUniqueId(), reason);
 						} catch (IOException e) {
-							System.out.println("Banns >> Can not send message to player on mute");
+							System.out.println("Banns ERROR >> Can not send message to player on mute");
 							e.printStackTrace();
-							System.out.println("Banns >> Can not send message to player on mute");
+							System.out.println("Banns ERROR >> Can not send message to player on mute");
 						}
 					}
 				}
 
-				if (MuteSQLHandler.playerExists(uuid)) {
-					MuteSQLHandler.unban(uuid);
-				}
-
 				// send mute to SQL (async for server not for sql)
-				MuteSQLHandler.createBan(uuid, reason, bannerName, time, perma);
+				new Mute(uuid).mute(reason, bannerName, time, perma);
 
 				banner.sendMessage(
 						new TextComponent(Banns.getPrefix() + "§7You muted §c" + nameName + "§7 for §e" + reason));

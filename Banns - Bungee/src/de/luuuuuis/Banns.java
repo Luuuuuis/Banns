@@ -60,22 +60,14 @@ public class Banns extends Plugin {
 				+ " \\ \\_____\\  \\ \\_\\ \\_\\  \\ \\_\\\\\"\\_\\  \\ \\_\\\\\"\\_\\  \\/\\_____\\ \r\n"
 				+ "  \\/_____/   \\/_/\\/_/   \\/_/ \\/_/   \\/_/ \\/_/   \\/_____/ " + "\r\n");
 
-		System.out.println("");
-		System.out.println("");
-
 		/**
 		 *
-		 *
-		 * Auto-Updater
-		 * 
+		 * Updater
 		 * 
 		 */
 
-		System.out.println("Banns >> Bootstraping plugin with version: " + getDescription().getVersion());
-		System.out.println("");
-		System.out.println("Discord for Support: https://discord.gg/wKuHFWa");
-		System.out.println("");
-		System.out.println("Banns >> Searching for new updates!");
+		System.out.println("Banns >> Enabling Banns (" + getDescription().getVersion() + ")");
+		System.out.println("Banns >> Discord for Support: https://discord.gg/2aSSGcz");
 
 		URL url;
 		HttpURLConnection con = null;
@@ -88,21 +80,22 @@ public class Banns extends Plugin {
 
 		try (BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));) {
 
+			System.out.println("Banns >> Searching for new builds!");
+
 			String l;
 			l = in.readLine();
 			if (!(l.equalsIgnoreCase(getDescription().getVersion()))) {
 
-				System.out.println("Banns >> Version: " + l + " found!");
+				System.out.println("Banns >> New build (" + l + ") found!");
+				System.out.println("Banns >> Download here: https://www.spigotmc.org/resources/.57031/");
 
 				update = true;
-
-				System.out.println("Banns >> Please update in you WebInterface");
 			} else {
 				con.disconnect();
 				in.close();
 				l = null;
 				update = false;
-				System.out.println("Banns >> No update found");
+				System.out.println("Banns >> You are running on the latest build ;)");
 			}
 
 		} catch (IOException e) {
@@ -137,7 +130,7 @@ public class Banns extends Plugin {
 				input.close();
 				output.close();
 
-				System.out.println("Banns >> config downloaded");
+				System.out.println("Banns >> New config.json downloaded");
 
 			} catch (Exception ex) {
 				ex.printStackTrace();
@@ -164,7 +157,7 @@ public class Banns extends Plugin {
 				input.close();
 				output.close();
 
-				System.out.println("Banns >> language file downloaded");
+				System.out.println("Banns >> New us-en.json downloaded");
 			} catch (IOException ex) {
 				ex.printStackTrace();
 			}
@@ -216,7 +209,7 @@ public class Banns extends Plugin {
 
 				} catch (Exception ex) {
 					ex.printStackTrace();
-					System.out.println("Error while reading JSON file");
+					System.out.println("Banns ERROR >> Error while reading JSON file");
 				}
 
 			}
@@ -240,8 +233,6 @@ public class Banns extends Plugin {
 			dcbot = new DiscordBot();
 
 		instance = this;
-
-		System.out.println("Banns >> BungeeCord Addon was started!");
 
 		getProxy().registerChannel("BungeeCord");
 

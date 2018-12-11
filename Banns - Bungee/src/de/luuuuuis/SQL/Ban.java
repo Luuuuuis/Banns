@@ -7,15 +7,15 @@ import java.sql.SQLException;
 public class Ban {
 
 	static MySQL MySQL = new MySQL();
-	
+
 	String uuid;
-	
+
 	public Ban(String uuid) {
 		this.uuid = uuid;
 	}
 
 	public boolean playerExistsbyIP(String IP) {
-		try ( ResultSet rs = MySQL.getResult("SELECT * FROM bannedPlayers WHERE IP='" + IP + "'"); ) {
+		try (ResultSet rs = MySQL.getResult("SELECT * FROM bannedPlayers WHERE IP='" + IP + "'");) {
 			if (rs.next()) {
 				return rs.getString("UUID") != null;
 			}
@@ -47,8 +47,9 @@ public class Ban {
 				if (BanInfo.getBanInfo(uuid) == null) {
 					long currenttime = System.currentTimeMillis();
 					long next = currenttime + time;
-					
-					try (PreparedStatement pre = MySQL.con.prepareStatement("INSERT INTO bannedPlayers (UUID, BANNER, IP, BANNED_TIME, BANNED_NEXT, REASON, PERM) VALUES (?, ?, ?, ?, ?, ?)"); ) {
+
+					try (PreparedStatement pre = de.luuuuuis.SQL.MySQL.con.prepareStatement(
+							"INSERT INTO bannedPlayers (UUID, BANNER, IP, BANNED_TIME, BANNED_NEXT, REASON, PERM) VALUES (?, ?, ?, ?, ?, ?, ?)");) {
 						pre.setString(1, uuid);
 						pre.setString(2, Banner);
 						pre.setString(3, Ip);
@@ -56,10 +57,9 @@ public class Ban {
 						pre.setLong(5, next);
 						pre.setString(6, reason);
 						pre.setInt(7, perma);
-						
-						
+
 						pre.executeUpdate();
-						
+
 					} catch (SQLException e) {
 						e.printStackTrace();
 					}

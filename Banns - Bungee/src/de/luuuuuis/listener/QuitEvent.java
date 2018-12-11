@@ -12,16 +12,15 @@ import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.event.EventHandler;
 
 public class QuitEvent implements Listener {
-	
-	
+
 	@EventHandler
 	public void onQuit(PlayerDisconnectEvent e) {
 		ProxiedPlayer p = e.getPlayer();
-		
-		if(ChatEvent.mutedList.containsKey(p.getUniqueId())) {
+
+		if (ChatEvent.mutedList.containsKey(p.getUniqueId())) {
 			ChatEvent.mutedList.remove(p.getUniqueId());
 		}
-		
+
 	}
 
 }
