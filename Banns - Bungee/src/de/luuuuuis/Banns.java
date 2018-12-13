@@ -82,18 +82,14 @@ public class Banns extends Plugin {
 
 			System.out.println("Banns >> Searching for new builds!");
 
-			String l;
-			l = in.readLine();
-			if (!(l.equalsIgnoreCase(getDescription().getVersion()))) {
+			if (!(in.readLine().equalsIgnoreCase(getDescription().getVersion()))) {
 
-				System.out.println("Banns >> New build (" + l + ") found!");
-				System.out.println("Banns >> Download here: https://www.spigotmc.org/resources/.57031/");
+				System.out.println("Banns >> New build (" + in.readLine() + ") found!");
+				System.out.println("Banns >> Download: https://www.spigotmc.org/resources/.57031/");
 
 				update = true;
 			} else {
 				con.disconnect();
-				in.close();
-				l = null;
 				update = false;
 				System.out.println("Banns >> You are running on the latest build ;)");
 			}
@@ -108,13 +104,14 @@ public class Banns extends Plugin {
 		File file;
 
 		file = new File(getDataFolder().getPath(), "config.json");
-		try {
-			dowURL = new URL("http://luis.bplaced.net/Banns/Auto-Updater/config.json");
-		} catch (MalformedURLException ex) {
-			ex.printStackTrace();
-		}
 
 		if (!file.exists()) {
+			try {
+				dowURL = new URL("http://luis.bplaced.net/Banns/Auto-Updater/config.json");
+				file.createNewFile();
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
 			try (InputStream input = dowURL.openStream(); FileOutputStream output = new FileOutputStream(file);) {
 
 				if (!getDataFolder().exists()) {
@@ -137,15 +134,15 @@ public class Banns extends Plugin {
 			}
 		}
 
-		try {
-			dowURL = new URL("http://luis.bplaced.net/Banns/Auto-Updater/us-en.json");
-		} catch (MalformedURLException ex) {
-			ex.printStackTrace();
-		}
-
 		file = new File(getDataFolder().getPath(), "us-en.json");
 
 		if (!file.exists()) {
+			try {
+				dowURL = new URL("http://luis.bplaced.net/Banns/Auto-Updater/us-en.json");
+				file.createNewFile();
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
 			try (InputStream input = dowURL.openStream(); FileOutputStream output = new FileOutputStream(file);) {
 
 				byte[] buffer = new byte[4096];
