@@ -126,7 +126,7 @@ public class PluginMessageListener implements Listener {
 
 					} else {
 						banner.sendMessage(
-								new TextComponent(Banns.getPrefix() + "§4You are not allowed to bann team members."));
+								new TextComponent(Banns.getPrefix() + "§4You are not allowed to ban team members."));
 						return;
 					}
 				}
@@ -134,7 +134,7 @@ public class PluginMessageListener implements Listener {
 				// send ban to SQL (async for server not for sql)
 				ban.ban(reason, ip, bannerName, time, perma);
 
-				banner.sendMessage(Banns.getPrefix() + "§7You banned §c" + nameName + "§7 for §e" + reason);
+				banner.sendMessage(Banns.getPrefix() + "§7You baned §c" + nameName + "§7 for §e" + reason);
 
 				Info.LastBanName = nameName;
 				Info.LastBanReason = reason;
@@ -142,7 +142,7 @@ public class PluginMessageListener implements Listener {
 
 				ProxyServer.getInstance().getPlayers().forEach(all -> {
 					if (all.hasPermission(Banns.getBanperm())) {
-						all.sendMessage(Banns.getPrefix() + "§e" + banner.getDisplayName() + " §7banned §c" + nameName
+						all.sendMessage(Banns.getPrefix() + "§e" + banner.getDisplayName() + " §7baned §c" + nameName
 								+ "§7 for §c§l" + reason + "§7.");
 					}
 				});
@@ -202,7 +202,7 @@ public class PluginMessageListener implements Listener {
 						new TextComponent(Banns.getPrefix() + "§aYou unbaned §e" + nameName + " §asuccessfully."));
 			} else {
 				banner.sendMessage(
-						new TextComponent(Banns.getPrefix() + "The player §e" + nameName + " §7isn't banned!"));
+						new TextComponent(Banns.getPrefix() + "The player §e" + nameName + " §7isn't baned!"));
 			}
 		} else if (type.equals("COUSTOM")) {
 			banner.sendMessage("");

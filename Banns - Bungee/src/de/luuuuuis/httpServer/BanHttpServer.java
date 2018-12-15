@@ -3,7 +3,6 @@ package de.luuuuuis.httpServer;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.security.NoSuchAlgorithmException;
-import java.util.Collections;
 import java.util.HashMap;
 
 import com.sun.net.httpserver.HttpExchange;
@@ -34,7 +33,7 @@ public class BanHttpServer {
 				if (arg0.getRequestURI() == null || arg0.getRequestURI().toString().isEmpty()
 						|| arg0.getRequestURI().toString().equalsIgnoreCase("/")) {
 					arg0.getResponseHeaders().add("Location", "/overview");
-					response(302, "If you see this you are totaly wrong here!".getBytes(), arg0);
+					response(302, "If you see this you are totally wrong here!".getBytes(), arg0);
 				} else {
 					String q = arg0.getRequestURI().toString();
 					for (String s : rndString) {
@@ -44,9 +43,7 @@ public class BanHttpServer {
 					}
 
 					arg0.getResponseHeaders().add("Location", "/overview");
-					arg0.getResponseHeaders().put("Context-Type",
-							Collections.singletonList("text/plain; charset=UTF-8"));
-					response(302, readSite("404.html").getBytes(), arg0);
+					response(302, "If you see this you are totally wrong here!".getBytes(), arg0);
 
 				}
 			}

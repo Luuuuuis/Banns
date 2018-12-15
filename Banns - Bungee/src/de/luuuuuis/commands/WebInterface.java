@@ -37,14 +37,14 @@ public class WebInterface extends Command {
 			if (args[0].equalsIgnoreCase("pwreset")) {
 
 				p.sendMessage(Banns.getPrefix() + "§c/webinterface <Passwort>");
-				p.sendMessage(Banns.getPrefix() + "§c/webinterface pwreset [New password]");
-				p.sendMessage(Banns.getPrefix() + "§c/webinterface remove [Player]");
+				p.sendMessage(Banns.getPrefix() + "§c/webinterface pwreset <New password>");
+				p.sendMessage(Banns.getPrefix() + "§c/webinterface remove <Player>");
 
 			} else if (args[0].equalsIgnoreCase("remove")) {
 
 				p.sendMessage(Banns.getPrefix() + "§c/webinterface <Passwort>");
-				p.sendMessage(Banns.getPrefix() + "§c/webinterface pwreset [New password]");
-				p.sendMessage(Banns.getPrefix() + "§c/webinterface remove [Player]");
+				p.sendMessage(Banns.getPrefix() + "§c/webinterface pwreset <New password>");
+				p.sendMessage(Banns.getPrefix() + "§c/webinterface remove <Player>");
 
 			} else {
 

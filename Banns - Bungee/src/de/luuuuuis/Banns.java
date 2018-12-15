@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Iterator;
 import java.util.Map;
@@ -20,6 +19,7 @@ import org.json.simple.parser.JSONParser;
 import de.luuuuuis.Channels.PluginMessageListener;
 import de.luuuuuis.SQL.MySQL;
 import de.luuuuuis.commands.CheckCmd;
+import de.luuuuuis.commands.Kick;
 import de.luuuuuis.commands.UnBanCmd;
 import de.luuuuuis.commands.WebInterface;
 import de.luuuuuis.commands.unMute;
@@ -98,12 +98,16 @@ public class Banns extends Plugin {
 			e.printStackTrace();
 		}
 
+		if (!getDataFolder().exists()) {
+			getDataFolder().mkdir();
+		}
+		
 		FilePath = getDataFolder().getPath();
 
 		URL dowURL = null;
 		File file;
 
-		file = new File(getDataFolder().getPath(), "config.json");
+		file = new File(getDataFolder().getAbsolutePath(), "config.json");
 
 		if (!file.exists()) {
 			try {
@@ -114,10 +118,6 @@ public class Banns extends Plugin {
 			}
 			try (InputStream input = dowURL.openStream(); FileOutputStream output = new FileOutputStream(file);) {
 
-				if (!getDataFolder().exists()) {
-					getDataFolder().mkdir();
-				}
-
 				byte[] buffer = new byte[4096];
 				int n = 0;
 				while (-1 != (n = input.read(buffer))) {
@@ -127,7 +127,7 @@ public class Banns extends Plugin {
 				input.close();
 				output.close();
 
-				System.out.println("Banns >> New config.json downloaded");
+				System.out.println("Banns >> config.json downloaded");
 
 			} catch (Exception ex) {
 				ex.printStackTrace();
@@ -154,7 +154,7 @@ public class Banns extends Plugin {
 				input.close();
 				output.close();
 
-				System.out.println("Banns >> New us-en.json downloaded");
+				System.out.println("Banns >> us-en.json downloaded");
 			} catch (IOException ex) {
 				ex.printStackTrace();
 			}
@@ -245,6 +245,7 @@ public class Banns extends Plugin {
 		pm.registerCommand(this, new UnBanCmd("unban"));
 		pm.registerCommand(this, new unMute("unmute"));
 		pm.registerCommand(this, new WebInterface("webinterface"));
+		pm.registerCommand(this, new Kick("kick"));
 
 	}
 

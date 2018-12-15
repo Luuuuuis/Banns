@@ -44,6 +44,8 @@ public class HttpSQL {
 					.prepareStatement("INSERT INTO WebInterface (USERNAME, PASSWORD) VALUES (?, ?)");) {
 				pre.setString(1, username);
 				pre.setString(2, LoginContextHandler.hashString(password));
+				
+				pre.executeUpdate();
 			} catch (SQLException | NoSuchAlgorithmException ex) {
 				ex.printStackTrace();
 			}

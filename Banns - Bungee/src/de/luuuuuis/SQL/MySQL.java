@@ -26,7 +26,9 @@ public class MySQL {
 				System.out.println("Banns >> MySQL Connected");
 				createTable();
 			} catch (SQLException e) {
+				System.out.println("Banns ERROR >> Wrong MySQL Credentials");
 				e.printStackTrace();
+				System.out.println("Banns ERROR >> Wrong MySQL Credentials");
 			}
 		}
 	}

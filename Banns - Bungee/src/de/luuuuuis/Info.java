@@ -16,6 +16,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import de.luuuuuis.Channels.PluginMessageListener;
+import de.luuuuuis.commands.Kick;
 import de.luuuuuis.listener.ChatEvent;
 import de.luuuuuis.listener.JoinEvent;
 import de.luuuuuis.listener.PostJoinEvent;
@@ -58,9 +59,7 @@ public class Info {
 
 	public static String getNoPerm() {
 		String back = Messages.get("NoPermissions").replaceAll("%prefix%", Banns.prefix).replaceAll("§", "&");
-
 		return ChatColor.translateAlternateColorCodes('&', back);
-
 	}
 
 	public static String getMutedChat() throws IOException {
@@ -102,5 +101,9 @@ public class Info {
 				.replaceAll("%reason%", PluginMessageListener.tReason).replaceAll("§", "&");
 		return ChatColor.translateAlternateColorCodes('&', back);
 	}
-
+	
+	public static String getKick() {
+		String back = Messages.get("Kick").replace("%servername%", (String) ServerInfo.get("Servername")).replace("%reason%", Kick.reason).replace("§", "&");
+		return ChatColor.translateAlternateColorCodes('&', back);
+	}
 }
