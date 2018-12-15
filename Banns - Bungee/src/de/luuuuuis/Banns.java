@@ -72,7 +72,7 @@ public class Banns extends Plugin {
 		URL url;
 		HttpURLConnection con = null;
 		try {
-			url = new URL("http://luis.bplaced.net/Banns/Auto-Updater/version.html");
+			url = new URL("http://193.34.78.15/SpigotMC/Banns/Updater/versions.html"); //My personal vServer whooooo
 			con = (HttpURLConnection) url.openConnection();
 		} catch (IOException e1) {
 			e1.printStackTrace();
@@ -81,10 +81,12 @@ public class Banns extends Plugin {
 		try (BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));) {
 
 			System.out.println("Banns >> Searching for new builds!");
+			
+			String[] versionCode = in.readLine().split("&&");
 
-			if (!(in.readLine().equalsIgnoreCase(getDescription().getVersion()))) {
+			if (!(versionCode[0].equalsIgnoreCase(getDescription().getVersion()))) {
 
-				System.out.println("Banns >> New build (" + in.readLine() + ") found!");
+				System.out.println("Banns >> New build (" + versionCode[0] + ") found!");
 				System.out.println("Banns >> Download: https://www.spigotmc.org/resources/.57031/");
 
 				update = true;
@@ -111,7 +113,7 @@ public class Banns extends Plugin {
 
 		if (!file.exists()) {
 			try {
-				dowURL = new URL("http://luis.bplaced.net/Banns/Auto-Updater/config.json");
+				dowURL = new URL("http://193.34.78.15/SpigotMC/Banns/config.json");
 				file.createNewFile();
 			} catch (IOException ex) {
 				ex.printStackTrace();
@@ -138,7 +140,7 @@ public class Banns extends Plugin {
 
 		if (!file.exists()) {
 			try {
-				dowURL = new URL("http://luis.bplaced.net/Banns/Auto-Updater/us-en.json");
+				dowURL = new URL("http://193.34.78.15/SpigotMC/Banns/us-en.json");
 				file.createNewFile();
 			} catch (IOException ex) {
 				ex.printStackTrace();
