@@ -13,11 +13,11 @@ Banns.Unban;
 Banns.administrate;
 
 Commands:
-/ban [/mute];
-/unban;
-/unmute;
-/check;
-/webinterface;
+-/ban [/mute]
+-/unban
+-/unmute
+-/check
+-/webinterface
 
 Install:
 Move "Banns - Bungee.jar" into your BungeeCode plugins folder.
